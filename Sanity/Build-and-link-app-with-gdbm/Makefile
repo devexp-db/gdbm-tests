@@ -28,7 +28,7 @@ export TESTVERSION=1.0
 
 BUILT_FILES=
 
-FILES=$(METADATA) runtest.sh Makefile PURPOSE scoredb.c scoredb.h
+FILES=$(METADATA) autoconf.h  extern.h  gdbmconst.h  gdbmdefs.h  gdbmerrno.h  getopt.h  Makefile  proto.h  PURPOSE  runtest.sh  scoredb.c  scoredb.h  systems.h  testgdbm.c
 
 .PHONY: all install download clean
 

@@ -35,18 +35,27 @@ rlJournalStart
     rlPhaseStartSetup
         rlAssertRpm $PACKAGE
         rlRun "TmpDir=\`mktemp -d\`" 0 "Creating tmp directory"
-	# examples retrieved from http://www.cs.mun.ca/~rod/Fall97/cs3718/Examples/Gdbm/
-	cp scoredb.* $TmpDir
+	cp *.c *.h $TmpDir
         rlRun "pushd $TmpDir"
     rlPhaseEnd
 
-    rlPhaseStartTest
+    rlPhaseStartTest scoredb
+	# examples retrieved from http://www.cs.mun.ca/~rod/Fall97/cs3718/Examples/Gdbm/
 	rlRun "gcc -lgdbm scoredb.c -o scoredb" 0 "Compile scoredb.c against gdbm"
         rlAssertExists "scoredb"
 	rlRun "./scoredb" 0 "Run created program"
         rlAssertExists "records"
 	./scoredb > records.log
 	rlAssertGrep "54 84 74" records.log
+    rlPhaseEnd
+
+    rlPhaseStartTest testgdbm
+	# retrieved from gdbm sources
+	rlRun "gcc -lgdbm testgdbm.c -o testgdbm" 0 "Compile testgdbm.c against gdbm"
+        rlAssertExists "testgdbm"
+	rlRun "./testgdbm <<<V" 0 "Run created program"
+	./testgdbm <<<V &> testgdbm.log
+	rlAssertGrep "This is GDBM version" testgdbm.log
     rlPhaseEnd
 
     rlPhaseStartCleanup
