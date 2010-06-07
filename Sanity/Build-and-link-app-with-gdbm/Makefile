@@ -51,7 +51,7 @@ $(METADATA): Makefile
 	@echo "Path:            $(TEST_DIR)" >> $(METADATA)
 	@echo "Description:     Build and link app with gdbm" >> $(METADATA)
 	@echo "Type:            Sanity" >> $(METADATA)
-	@echo "TestTime:        5m" >> $(METADATA)
+	@echo "TestTime:        10m" >> $(METADATA)
 	@echo "RunFor:          gdbm" >> $(METADATA)
 	@echo "Requires:        gdbm gdbm-devel" >> $(METADATA)
 	@echo "Priority:        Normal" >> $(METADATA)
