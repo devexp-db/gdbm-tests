@@ -53,8 +53,7 @@ rlJournalStart
 	# retrieved from gdbm sources
 	rlRun "gcc -lgdbm testgdbm.c -o testgdbm" 0 "Compile testgdbm.c against gdbm"
         rlAssertExists "testgdbm"
-# breaks s390x & ppc64
-#	rlRun "./testgdbm <<<V" 0 "Run created program"
+	rlRun "./testgdbm <<<V" 0 "Run created program"
 	./testgdbm <<<V &> testgdbm.log
 	rlAssertGrep "This is GDBM version" testgdbm.log
     rlPhaseEnd
