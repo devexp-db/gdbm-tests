@@ -28,11 +28,13 @@
 # Include rhts environment
 . /usr/bin/rhts-environment.sh
 . /usr/lib/beakerlib/beakerlib.sh
+. /usr/share/rhts-library/rhtslib.sh
 
 PACKAGE="gdbm"
 
 rlJournalStart
     rlPhaseStartSetup
+        arch=$(uname -i)
         rlAssertRpm $PACKAGE
         rlRun "TmpDir=\`mktemp -d\`" 0 "Creating tmp directory"
 	cp *.c *.h $TmpDir
@@ -49,6 +51,7 @@ rlJournalStart
 	rlAssertGrep "54 84 74" records.log
     rlPhaseEnd
 
+    if ! ( [[ $arch =~ "ppc" ]] || [[ $arch =~ "s390" ]] ); then
     rlPhaseStartTest testgdbm
 	# retrieved from gdbm sources
 	rlRun "gcc -lgdbm testgdbm.c -o testgdbm" 0 "Compile testgdbm.c against gdbm"
@@ -57,6 +60,7 @@ rlJournalStart
 	./testgdbm <<<V &> testgdbm.log
 	rlAssertGrep "This is GDBM version" testgdbm.log
     rlPhaseEnd
+    fi
 
     rlPhaseStartCleanup
         rlRun "popd"
