@@ -1,0 +1,28 @@
+PURPOSE of /CoreOS/gdbm/Regression/disable-locking-by-NDBM_LOCK-variable
+Description: setting NDBM_LOCK to 'no' will disable locking which is a performance bottleneck on NFS
+Author: Ales Zelinka <azelinka@redhat.com>
+Bug summary: dbm_* calls should call the underlying gdbm_* calls using then GDBM_NOLOCK flag
+Bugzilla link: https://bugzilla.redhat.com/show_bug.cgi?id=663932
+
+Description:
+
+We have a user who reported a problem with bad performance of their application when using the dbm_* calls to perform operations on database files hosted on a NFS share.
+
+The problem was traced to flock calls made by the gdbm_* calls which in turn were called by the dbm_*() functions used in the application. We noticed thousands of flock calls being made. These are inefficient when used over a NFS share since it results in a call being made over the wire and also results in the cache on the nfs client being invalidated. Locking calls are used as a cache coherency point on NFS clients and the cached data is invalidated every time a lock call is made. This results in a large number of READ calls over the NFS share which causes huge performance problems.
+
+These flock calls were unnecessary for this application since it first obtains a lock on a file which acts as a gatekeeper in the directory before performing any data operation on those files. So these flock calls being made only result in performance issues on this application without actually being required to provide any security against data corruption.
+
+The user has confirmed that using gdbm_*() calls directly with the GDBM_NOLOCK option instead of dbm_*() calls shows great improvements in performance.
+
+Note that the man page for dbm_* calls does mention that the user should not expect the functions to provide any locking when working on the data files and the users themselves should use other locking mechanisms.
+From man dbm_open
+--
+they do  not  protect  against multi-user access (in other words they do not   lock records or files),
+--
+
+
+This request is to have either
+
+1) dbm_* calls should use the GDBM_NOLOCK option when calling the corresponding gdbm_* calls OR 
+
+2) Allow an option so that when used, the dbm_*() calls to the corresponding gdbm_*() calls use the GDBM_NOLOCK option. A suggested way of passing this option is to check for 'GDBM_NOLOCK' environmental variable in the dbm_* call and if present, set the GDBM_NOLOCK flags for the corresponding gdbm_*() calls.
