@@ -39,7 +39,9 @@ rlPhaseStartSetup
 rlPhaseEnd
 
 rlPhaseStartTest
+    NDBM_LOCK=yes strace ./dbm_test
     rlRun "NDBM_LOCK=yes strace ./dbm_test 2>&1|grep flock" 0 "locking detected when running reproducer with locking allowed (NDBM_LOCK=yes)"
+    NDBM_LOCK=no strace ./dbm_test
     rlRun "NDBM_LOCK=no strace ./dbm_test 2>&1|grep flock" 1 "locking _not_ detected when running reproducer with locking disabled (NDBM_LOCK=no)"
 rlPhaseEnd
 
