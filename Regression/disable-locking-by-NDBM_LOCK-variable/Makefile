@@ -25,7 +25,7 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 export TEST=/CoreOS/gdbm/Regression/disable-locking-by-NDBM_LOCK-variable
-export TESTVERSION=1.0
+export TESTVERSION=1.1
 
 BUILT_FILES=
 
