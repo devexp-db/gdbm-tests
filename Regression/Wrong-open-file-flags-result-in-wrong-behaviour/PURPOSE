@@ -1,0 +1,5 @@
+PURPOSE of /CoreOS/gdbm/Regression/Wrong-open-file-flags-result-in-wrong-behaviour
+Description: Test for BZ#629640 (Wrong open file flags result in wrong behaviour)
+Author: Robin Hack <rhack@redhat.com>
+Bug summary: Wrong open file flags result in wrong behaviour when opening un-existed file for reading
+Bugzilla link: https://bugzilla.redhat.com/show_bug.cgi?id=629640
