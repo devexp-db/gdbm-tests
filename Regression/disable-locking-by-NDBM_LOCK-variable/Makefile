@@ -59,6 +59,6 @@ $(METADATA): Makefile
 	@echo "License:         GPLv2" >> $(METADATA)
 	@echo "Confidential:    no" >> $(METADATA)
 	@echo "Destructive:     no" >> $(METADATA)
-	@echo "Bug:             663932" >> $(METADATA)
+	@echo "Bug:             663932 1178101" >> $(METADATA)
 
 	rhts-lint $(METADATA)

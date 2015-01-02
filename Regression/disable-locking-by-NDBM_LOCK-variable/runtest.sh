@@ -40,9 +40,16 @@ rlPhaseEnd
 
 rlPhaseStartTest
     NDBM_LOCK=yes strace ./dbm_test
-    rlRun "NDBM_LOCK=yes strace ./dbm_test 2>&1|grep flock" 0 "locking detected when running reproducer with locking allowed (NDBM_LOCK=yes)"
+
+    /* Locking mechanism is different on newest rhels.
+    LOCK_FUNCTION="flock"
+    if rlIsRHEL '>=6'; then
+	LOCK_FUNCTION="fcntl.*F_SETLK"
+    fi
+
+    rlRun "NDBM_LOCK=yes strace ./dbm_test 2>&1|grep ${LOCK_FUNCTION}" 0 "locking detected when running reproducer with locking allowed (NDBM_LOCK=yes)"
     NDBM_LOCK=no strace ./dbm_test
-    rlRun "NDBM_LOCK=no strace ./dbm_test 2>&1|grep flock" 1 "locking _not_ detected when running reproducer with locking disabled (NDBM_LOCK=no)"
+    rlRun "NDBM_LOCK=no strace ./dbm_test 2>&1|grep ${LOCK_FUNCTION}" 1 "locking _not_ detected when running reproducer with locking disabled (NDBM_LOCK=no)"
 rlPhaseEnd
 
 rlPhaseStartCleanup
