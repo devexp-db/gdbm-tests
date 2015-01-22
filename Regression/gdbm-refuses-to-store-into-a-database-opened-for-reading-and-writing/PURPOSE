@@ -1,0 +1,5 @@
+PURPOSE of /CoreOS/gdbm/Regression/gdbm-refuses-to-store-into-a-database-opened-for-reading-and-writing
+Description: Test for BZ#1180392 (gdbm-1.8.0-37.el6 refuses to store into a database)
+Author: Robin Hack <rhack@redhat.com>
+Bug summary: gdbm-1.8.0-37.el6 refuses to store into a database opened for reading and writing
+Bugzilla link: https://bugzilla.redhat.com/show_bug.cgi?id=1180392
