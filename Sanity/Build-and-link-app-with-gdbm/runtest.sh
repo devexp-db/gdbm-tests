@@ -50,7 +50,7 @@ rlJournalStart
 	./scoredb > records.log &&	rlAssertGrep "54 84 74" records.log
     rlPhaseEnd
 
-    if ! ( [[ $arch =~ "ppc" ]] || [[ $arch =~ "s390" ]] ); then
+    if  ( [[ $arch =~ "x86_64" ]] || [[ $arch =~ "i386" ]] ); then
     rlPhaseStartTest testgdbm
 	# retrieved from gdbm sources
 	rlRun "gcc -lgdbm testgdbm.c -o testgdbm" 0 "Compile testgdbm.c against gdbm"
