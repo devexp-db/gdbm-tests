@@ -35,13 +35,17 @@ PACKAGE="gdbm"
 rlJournalStart
 rlPhaseStartSetup
     rlAssertRpm $PACKAGE
-    rlRun "gcc -o dbm_test dbm_test.c -lgdbm" 0 "compiling the reproducer"
+    if rlIsRHEL '<7'; then
+	    rlRun "gcc -o dbm_test dbm_test.c -lgdbm" 0 "compiling the reproducer"
+    else
+	    rlRun "gcc -o dbm_test dbm_test.c -lgdbm_compat" 0 "compiling the reproducer"
+    fi
 rlPhaseEnd
 
 rlPhaseStartTest
     NDBM_LOCK=yes strace ./dbm_test
 
-    /* Locking mechanism is different on newest rhels.
+    # Locking mechanism is different on newest rhels.
     LOCK_FUNCTION="flock"
     if rlIsRHEL '>=6'; then
 	LOCK_FUNCTION="fcntl.*F_SETLK"
