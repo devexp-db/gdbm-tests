@@ -1,0 +1,3 @@
+PURPOSE of /CoreOS/gdbm/Sanity/testsuite
+Description: runs test suite from src package
+Author: Vaclav Danek <vdanek@redhat.com>
