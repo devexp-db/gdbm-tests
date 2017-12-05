@@ -59,7 +59,6 @@ rlJournalStart
         rlRun "cd $BUILDDIR"
         rlRun "cd gdbm-*"
         rlRun "cp $TmpDir/config.*.ppc64le build-aux/"
-        bash
         rlRun "./configure --disable-static --enable-libgdbm-compat"
         rlRun "make check"
         rlRun "ls | grep -v tests | xargs rm -rf"
