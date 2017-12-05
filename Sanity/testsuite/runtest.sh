@@ -35,7 +35,6 @@ rlJournalStart
     rlPhaseStartSetup
         rlAssertRpm $PACKAGE
         rlRun "TmpDir=\$(mktemp -d)" 0 "Creating tmp directory"
-        rlRun "cp config.*.ppc64le $TmpDir"
         rlRun "pushd $TmpDir"
         # fetch srpm
         if  rlIsRHEL ; then
@@ -58,8 +57,11 @@ rlJournalStart
         rlRun "rpmbuild -bp $SPECDIR/$PACKAGE.spec"
         rlRun "cd $BUILDDIR"
         rlRun "cd gdbm-*"
-        rlRun "cp $TmpDir/config.*.ppc64le build-aux/"
-        rlRun "./configure --disable-static --enable-libgdbm-compat"
+        if rlGetPrimaryArch == 'ppc64le'; then
+            rlRun "./configure --disable-static --enable-libgdbm-compat --build=ppc64le-redhat-linux-gnu --host=ppc64le-redhat-linux-gnu"
+        else
+            rlRun "./configure --disable-static --enable-libgdbm-compat"
+        fi
         rlRun "make check"
         rlRun "ls | grep -v tests | xargs rm -rf"
         rlRun "cd tests"
