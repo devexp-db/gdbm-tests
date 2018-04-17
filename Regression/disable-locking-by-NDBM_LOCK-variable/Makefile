@@ -55,6 +55,7 @@ $(METADATA): Makefile
 	@echo "TestTime:        5m" >> $(METADATA)
 	@echo "RunFor:          gdbm" >> $(METADATA)
 	@echo "Requires:        gdbm gdbm-devel gcc" >> $(METADATA)
+	@echo "Requires:        strace" >> $(METADATA)
 	@echo "Priority:        Normal" >> $(METADATA)
 	@echo "License:         GPLv2" >> $(METADATA)
 	@echo "Confidential:    no" >> $(METADATA)
