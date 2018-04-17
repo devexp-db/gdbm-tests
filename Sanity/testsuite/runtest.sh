@@ -36,6 +36,11 @@ rlJournalStart
         rlAssertRpm $PACKAGE
         rlRun "TmpDir=\$(mktemp -d)" 0 "Creating tmp directory"
         rlRun "pushd $TmpDir"
+        if rlIsRHEL "<=7"; then
+            rlRun "yum -y install yum-utils"
+        else
+            rlRun "dnf -y install dnf-utils"
+        fi
         # fetch srpm
         if  rlIsRHEL ; then
             rlRun "rlFetchSrcForInstalled $PACKAGE || yumdownloader --enablerepo='*' --source $PACKAGE" \
