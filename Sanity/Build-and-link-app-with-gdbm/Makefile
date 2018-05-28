@@ -53,7 +53,7 @@ $(METADATA): Makefile
 	@echo "Type:            Sanity" >> $(METADATA)
 	@echo "TestTime:        10m" >> $(METADATA)
 	@echo "RunFor:          gdbm" >> $(METADATA)
-	@echo "Requires:        gdbm gdbm-devel" >> $(METADATA)
+	@echo "Requires:        gcc gdbm gdbm-devel" >> $(METADATA)
 	@echo "Priority:        Normal" >> $(METADATA)
 	@echo "License:         GPLv3" >> $(METADATA)
 	@echo "Confidential:    no" >> $(METADATA)
