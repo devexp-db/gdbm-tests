@@ -28,7 +28,7 @@ export TESTVERSION=1.0
 
 BUILT_FILES=
 
-FILES=$(METADATA) autoconf.h  extern.h  gdbmconst.h  gdbmdefs.h  gdbmerrno.h  getopt.h  Makefile  proto.h  PURPOSE  runtest.sh  scoredb.c  scoredb.h  systems.h  testgdbm.c
+FILES=$(METADATA) autoconf.h  extern.h  gdbmconst.h  gdbmdefs.h  gdbmerrno.h  gdbmerrno.patch  getopt.h  Makefile  proto.h  PURPOSE  runtest.sh  scoredb.c  scoredb.h  systems.h  testgdbm.c
 
 .PHONY: all install download clean
 
@@ -53,7 +53,7 @@ $(METADATA): Makefile
 	@echo "Type:            Sanity" >> $(METADATA)
 	@echo "TestTime:        10m" >> $(METADATA)
 	@echo "RunFor:          gdbm" >> $(METADATA)
-	@echo "Requires:        gcc gdbm gdbm-devel" >> $(METADATA)
+	@echo "Requires:        gcc gdbm gdbm-devel patch" >> $(METADATA)
 	@echo "Priority:        Normal" >> $(METADATA)
 	@echo "License:         GPLv3" >> $(METADATA)
 	@echo "Confidential:    no" >> $(METADATA)

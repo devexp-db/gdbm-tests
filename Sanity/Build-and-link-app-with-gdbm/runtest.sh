@@ -37,8 +37,11 @@ rlJournalStart
         arch=$(uname -i)
         rlAssertRpm $PACKAGE
         rlRun "TmpDir=\`mktemp -d\`" 0 "Creating tmp directory"
-	cp *.c *.h $TmpDir
+	cp *.c *.h *.patch $TmpDir
         rlRun "pushd $TmpDir"
+        if rlIsRHEL 8 ; then
+            rlRun "patch gdbmerrno.h gdbmerrno.patch" 0 "Patching gdbmerrno.h for rhel8"
+        fi
     rlPhaseEnd
 
     rlPhaseStartTest scoredb
