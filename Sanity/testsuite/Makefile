@@ -51,7 +51,7 @@ $(METADATA): Makefile
 	@echo "Path:            $(TEST_DIR)" >> $(METADATA)
 	@echo "Description:     runs test suite from src package" >> $(METADATA)
 	@echo "Type:            Sanity" >> $(METADATA)
-	@echo "TestTime:        5m" >> $(METADATA)
+	@echo "TestTime:        10m" >> $(METADATA)
 	@echo "RunFor:          gdbm" >> $(METADATA)
 	@echo "Requires:        gdbm libtool readline-devel" >> $(METADATA)
 	@echo "Requires:	rpm-build" >> $(METADATA)
