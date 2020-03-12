@@ -54,7 +54,7 @@ $(METADATA): Makefile
 	@echo "TestTime:        10m" >> $(METADATA)
 	@echo "RunFor:          gdbm" >> $(METADATA)
 	@echo "Requires:        gdbm libtool readline-devel" >> $(METADATA)
-	@echo "Requires:	rpm-build" >> $(METADATA)
+	@echo "Requires:	rpm-build gettext" >> $(METADATA)
 	@echo "Requires:        wget" >> $(METADATA)
 	@echo "Priority:        Normal" >> $(METADATA)
 	@echo "License:         GPLv2+" >> $(METADATA)
