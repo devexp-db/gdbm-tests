@@ -1,0 +1,21 @@
+component:
+- gdbm
+contact: Vaclav Danek <vdanek@redhat.com>
+description: ''
+duration: 10m
+enabled: true
+extra-nitrate: TC#0063258
+extra-summary: /CoreOS/gdbm/Sanity/Build-and-link-app-with-gdbm
+extra-task: /CoreOS/gdbm/Sanity/Build-and-link-app-with-gdbm
+require:
+- gcc
+- gdbm
+- gdbm-devel
+- patch
+summary: Build and link app with gdbm
+tag:
+- TIPpass
+- Tier1
+- broken5.8
+- broken5.9
+test: ./runtest.sh

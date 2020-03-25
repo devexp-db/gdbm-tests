@@ -1,0 +1,28 @@
+component:
+- gdbm
+contact: Vaclav Danek <vdanek@redhat.com>
+description: ''
+duration: 10m
+enabled: true
+extra-nitrate: TC#0562617
+extra-summary: /CoreOS/gdbm/Sanity/testsuite
+extra-task: /CoreOS/gdbm/Sanity/testsuite
+relevancy: |
+    distro = rhel-4, rhel-5, rhel-6: False
+require:
+- gdbm
+- libtool
+- readline-devel
+- rpm-build
+- gettext
+- wget
+summary: runs test suite from src package
+tag:
+- NoRHEL4
+- NoRHEL5
+- NoRHEL6
+- TIP_fedora_fail
+- TIPpass
+- TIPpass_Apps
+- Tier1
+test: ./runtest.sh
