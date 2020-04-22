@@ -1,6 +1,5 @@
-component:
-- gdbm
-contact: Vaclav Danek <vdanek@redhat.com>
+summary: setting NDBM_LOCK to 'no' will disable locking which is a performance bottleneck
+    on NFS
 description: "Bug summary: dbm_* calls should call the underlying gdbm_* calls using\
     \ then GDBM_NOLOCK flag\nBugzilla link: https://bugzilla.redhat.com/show_bug.cgi?id=663932\n\
     \nDescription:\n\nWe have a user who reported a problem with bad performance of\
@@ -30,22 +29,24 @@ description: "Bug summary: dbm_* calls should call the underlying gdbm_* calls u
     \ A suggested way of passing this option is to check for 'GDBM_NOLOCK' environmental\
     \ variable in the dbm_* call and if present, set the GDBM_NOLOCK flags for the\
     \ corresponding gdbm_*() calls.\n"
-duration: 5m
-enabled: true
-extra-nitrate: TC#0141535
-extra-summary: /CoreOS/gdbm/Regression/disable-locking-by-NDBM_LOCK-variable
-extra-task: /CoreOS/gdbm/Regression/disable-locking-by-NDBM_LOCK-variable
-relevancy: |
-    distro != rhel-5,rhel-6: False
+contact: Vaclav Danek <vdanek@redhat.com>
+component:
+- gdbm
+test: ./runtest.sh
 require:
 - gdbm
 - gdbm-devel
 - gcc
 - strace
-summary: setting NDBM_LOCK to 'no' will disable locking which is a performance bottleneck
-    on NFS
+duration: 5m
+enabled: true
 tag:
 - TIP_fedora_fail
 - TIPpass
 - Tier2
-test: ./runtest.sh
+tier: '2'
+relevancy: |
+    distro != rhel-5,rhel-6: False
+extra-summary: /CoreOS/gdbm/Regression/disable-locking-by-NDBM_LOCK-variable
+extra-task: /CoreOS/gdbm/Regression/disable-locking-by-NDBM_LOCK-variable
+extra-nitrate: TC#0141535

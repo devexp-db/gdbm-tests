@@ -1,24 +1,25 @@
-component:
-- gdbm
-contact: Vaclav Danek <vdanek@redhat.com>
+summary: Test for BZ#629640 (Wrong open file flags result in wrong behaviour)
 description: |
     Bug summary: Wrong open file flags result in wrong behaviour when opening un-existed file for reading
     Bugzilla link: https://bugzilla.redhat.com/show_bug.cgi?id=629640
-duration: 20m
-enabled: true
-extra-nitrate: TC#0448029
-extra-summary: /CoreOS/gdbm/Regression/Wrong-open-file-flags-result-in-wrong-behaviour
-extra-task: /CoreOS/gdbm/Regression/Wrong-open-file-flags-result-in-wrong-behaviour
-relevancy: |
-    distro < rhel-6: False
+contact: Vaclav Danek <vdanek@redhat.com>
+component:
+- gdbm
+test: ./runtest.sh
 require:
 - gdbm
 - gdbm-devel
 - gcc
 - glibc-devel
 - glibc
-summary: Test for BZ#629640 (Wrong open file flags result in wrong behaviour)
+duration: 20m
+enabled: true
 tag:
 - TIPpass
 - Tier2
-test: ./runtest.sh
+tier: '2'
+relevancy: |
+    distro < rhel-6: False
+extra-summary: /CoreOS/gdbm/Regression/Wrong-open-file-flags-result-in-wrong-behaviour
+extra-task: /CoreOS/gdbm/Regression/Wrong-open-file-flags-result-in-wrong-behaviour
+extra-nitrate: TC#0448029

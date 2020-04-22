@@ -1,24 +1,25 @@
-component:
-- gdbm
-contact: Vaclav Danek <vdanek@redhat.com>
+summary: Test for BZ#1180392 (gdbm-1.8.0-37.el6 refuses to store into a database)
 description: |
     Bug summary: gdbm-1.8.0-37.el6 refuses to store into a database opened for reading and writing
     Bugzilla link: https://bugzilla.redhat.com/show_bug.cgi?id=1180392
-duration: 20m
-enabled: true
-extra-nitrate: TC#0452532
-extra-summary: /CoreOS/gdbm/Regression/gdbm-refuses-to-store-into-a-database-opened-for-reading-and-writing
-extra-task: /CoreOS/gdbm/Regression/gdbm-refuses-to-store-into-a-database-opened-for-reading-and-writing
-relevancy: |
-    distro = rhel-4, rhel-5: False
+contact: Vaclav Danek <vdanek@redhat.com>
+component:
+- gdbm
+test: ./runtest.sh
 require:
 - gdbm
 - gdbm-devel
 - gcc
-summary: Test for BZ#1180392 (gdbm-1.8.0-37.el6 refuses to store into a database)
+duration: 20m
+enabled: true
 tag:
 - NoRHEL4
 - NoRHEL5
 - TIPpass
 - Tier2
-test: ./runtest.sh
+tier: '2'
+relevancy: |
+    distro = rhel-4, rhel-5: False
+extra-summary: /CoreOS/gdbm/Regression/gdbm-refuses-to-store-into-a-database-opened-for-reading-and-writing
+extra-task: /CoreOS/gdbm/Regression/gdbm-refuses-to-store-into-a-database-opened-for-reading-and-writing
+extra-nitrate: TC#0452532

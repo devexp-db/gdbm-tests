@@ -1,14 +1,9 @@
+summary: runs test suite from src package
+description: ''
+contact: Vaclav Danek <vdanek@redhat.com>
 component:
 - gdbm
-contact: Vaclav Danek <vdanek@redhat.com>
-description: ''
-duration: 10m
-enabled: true
-extra-nitrate: TC#0562617
-extra-summary: /CoreOS/gdbm/Sanity/testsuite
-extra-task: /CoreOS/gdbm/Sanity/testsuite
-relevancy: |
-    distro = rhel-4, rhel-5, rhel-6: False
+test: ./runtest.sh
 require:
 - gdbm
 - libtool
@@ -16,7 +11,8 @@ require:
 - rpm-build
 - gettext
 - wget
-summary: runs test suite from src package
+duration: 10m
+enabled: true
 tag:
 - NoRHEL4
 - NoRHEL5
@@ -25,5 +21,9 @@ tag:
 - TIPpass
 - TIPpass_Apps
 - Tier1
-test: ./runtest.sh
 tier: '1'
+relevancy: |
+    distro = rhel-4, rhel-5, rhel-6: False
+extra-summary: /CoreOS/gdbm/Sanity/testsuite
+extra-task: /CoreOS/gdbm/Sanity/testsuite
+extra-nitrate: TC#0562617
