@@ -70,7 +70,8 @@ sdbCreate(const char *dbName) {
     db->scoreDatabase = strdup( dbName );
     db->wr = gdbm_open( (char *)dbName, 1024, GDBM_WRCREAT, 0600, 0);
     gdbm_sync( db->wr );
-    db->rd = gdbm_open( (char *)dbName, 1024, GDBM_READER, 0600, 0);
+    // one file handler for read/write is enough
+    // db->rd = gdbm_open( (char *)dbName, 1024, GDBM_READER, 0600, 0);
 
     return db;
 }
@@ -83,7 +84,7 @@ sdbGetStudentRecord( Sdb db, const char *name ) {
 
     key.dptr = (char *)name;
     key.dsize = strlen( name ) + 1;
-    content = gdbm_fetch( db->rd, key );
+    content = gdbm_fetch( db->wr, key );
     if ( content.dptr == 0 ) return 0;
     rec = (int *)content.dptr;
     sr = srCreate( name, rec[0] );
@@ -120,7 +121,7 @@ sdbSync( Sdb db ) {
 
 void sdbFree( Sdb db ) {
     gdbm_close( db->wr );
-    gdbm_close( db->rd );
+    //gdbm_close( db->rd );
     free ( (void *)db->scoreDatabase);
     free( db );
 }

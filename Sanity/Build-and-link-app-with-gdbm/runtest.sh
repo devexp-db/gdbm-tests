@@ -37,11 +37,8 @@ rlJournalStart
         arch=$(uname -i)
         rlAssertRpm $PACKAGE
         rlRun "TmpDir=\`mktemp -d\`" 0 "Creating tmp directory"
-	cp *.c *.h *.patch $TmpDir
+	cp *.c *.h $TmpDir
         rlRun "pushd $TmpDir"
-        if rlIsRHEL 8 ; then
-            rlRun "patch gdbmerrno.h gdbmerrno.patch" 0 "Patching gdbmerrno.h for rhel8"
-        fi
     rlPhaseEnd
 
     rlPhaseStartTest scoredb
@@ -53,16 +50,23 @@ rlJournalStart
 	./scoredb > records.log &&	rlAssertGrep "54 84 74" records.log
     rlPhaseEnd
 
-    if  ( [[ $arch =~ "x86_64" ]] || [[ $arch =~ "i386" ]] ); then
-    rlPhaseStartTest testgdbm
+    rlPhaseStartTest gtload
 	# retrieved from gdbm sources
-	rlRun "gcc -lgdbm testgdbm.c -o testgdbm" 0 "Compile testgdbm.c against gdbm"
-        rlAssertExists "testgdbm"
-	rlRun "./testgdbm <<<V" 0 "Run created program"
-	./testgdbm <<<V &> testgdbm.log
-	rlAssertGrep "GDBM version" testgdbm.log
+	rlRun "gcc -lgdbm gtload.c -o gtload" 0 "Compile gtload.c against gdbm"
+        rlAssertExists "gtload"
+	rlRun "./gtload -h" 0 "Run created program"
+	./gtload -h &> gtload.log
+	rlAssertGrep "blocksize" gtload.log
     rlPhaseEnd
-    fi
+
+    rlPhaseStartTest dtdump
+	# retrieved from gdbm sources
+	rlRun "gcc -lgdbm -lgdbm_compat dtdump.c -o dtdump" 0 "Compile dtdump.c against gdbm"
+        rlAssertExists "dtdump"
+	rlRun "./dtdump -h" 0 "Run created program"
+	./dtdump -h &> dtdump.log
+	rlAssertGrep "DBFILE" dtdump.log
+    rlPhaseEnd
 
     rlPhaseStartCleanup
         rlRun "popd"

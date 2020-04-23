@@ -32,8 +32,9 @@
 #include "autoconf.h"
 
 #include "gdbmdefs.h"
-#include "gdbmerrno.h"
+//#include "gdbmerrno.h"
 #include "extern.h"
+#include "gdbm.h"
 
 //#include "getopt.h"
 
@@ -462,7 +463,7 @@ main (argc, argv)
 	  gets (key_line);
 	  key_data.dptr = key_line;
 	  key_data.dsize = strlen (key_line)+1;
-	  printf ("hash value = %x. \n\n", _gdbm_hash (key_data));
+	  //printf ("hash value = %x. \n\n", _gdbm_hash (key_data));
 	  key_data.dptr = NULL;
 	  break;
 
